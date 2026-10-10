@@ -85,8 +85,8 @@ public class OptimizationRequestPanel extends BasePanel {
         });
 
         runBtn.addActionListener(e -> {
-            List<Integer> selIdx = list.getSelectedIndices().length == 0
-                    ? allIndices(eligible.size()) : box(eligible.size(), list.getSelectedIndices());
+            int[] sel = list.getSelectedIndices();
+            List<Integer> selIdx = sel.length == 0 ? box(eligible.size(), sel) : box(sel.length, sel);
             List<BaseStation> chosen = new ArrayList<>();
             for (int idx : selIdx) chosen.add(eligible.get(idx));
             double target;
