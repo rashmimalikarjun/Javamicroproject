@@ -1,6 +1,7 @@
 package com.abctelecom.nms.view;
 
 import com.abctelecom.nms.model.User;
+import com.abctelecom.nms.util.ErrorHelper;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -77,11 +78,6 @@ public class MainFrame extends JFrame {
     /** Navigate to a card and trigger its data load (onShow). */
     public void show(String card) {
         cards.show(content, card);
-        for (java.awt.Component c : content.getComponents())
-            if (c instanceof BasePanel bp) {
-                // only fire onShow for the now-visible panel: find via layout constraint is overkill;
-                // BasePanel.onShow is idempotent and cheap, so fire for visible card by name match.
-            }
         java.awt.Component visible = visibleCard(card);
         if (visible instanceof BasePanel bp) bp.onShow();
     }
@@ -92,8 +88,9 @@ public class MainFrame extends JFrame {
         return null;
     }
 
-    private static String nameOf(java.awt.Component c) {
-        // CardLayout stores the name as the constraints key; we registered names in order.
+    private String nameOf(java.awt.Component c) {
+        // Cards were registered with the CARDS keys in declaration order,
+        // so the component index matches the CARDS array index.
         for (int i = 0; i < CARDS.length; i++)
             if (content.getComponent(i) == c) return CARDS[i];
         return "?";
@@ -105,10 +102,20 @@ public class MainFrame extends JFrame {
     }
 
     private void doLogout() {
-        AppContext.get().auth().logout();
-        SwingUtilities.invokeLater(() -> {
+        // Logout writes an audit/login-log entry -> run off the EDT, then swap windows.
+        AppContext.get().async(() -> {
+            AppContext.get().auth().logout();
+            return Boolean.TRUE;
+        }, ok -> SwingUtilities.invokeLater(() -> {
             dispose();
             Launcher.showLogin();
+        }), err -> {
+            ErrorHelper.show(this, err);
+            // Even if the DB audit write failed, end the local session.
+            SwingUtilities.invokeLater(() -> {
+                dispose();
+                Launcher.showLogin();
+            });
         });
     }
 }
