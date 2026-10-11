@@ -58,7 +58,7 @@ public class LoginPanel extends JPanel {
         btnLogin.setEnabled(false);
         msg.setText("Authenticating...");
         AppContext.get().async(
-                () -> ctx.auth().login(userField.getText(), new String(pwdField.getPassword())),
+                () -> AppContext.get().auth().login(userField.getText(), new String(pwdField.getPassword())),
                 (User u) -> {
                     btnLogin.setEnabled(true);
                     pwdField.setText("");
