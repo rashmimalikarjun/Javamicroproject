@@ -1,0 +1,8 @@
+# Copy this file to ./config.properties (working directory of the app) and fill in
+# your LOCAL development MySQL credentials. NEVER commit real credentials.
+# Environment variables QITROM_DB_URL / QITROM_DB_USER / QITROM_DB_PASSWORD and
+# -D system properties take precedence over this file.
+qitrom.db.url=jdbc:mysql://localhost:3306/qitrom_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+qitrom.db.user=qitrom_user
+qitrom.db.password=CHANGE_ME_locally
+qitrom.data.dir=data
