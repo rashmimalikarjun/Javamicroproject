@@ -54,21 +54,21 @@ public class BackupPanel extends BasePanel {
         Files.createDirectories(dir);
         List<String> out = new java.util.ArrayList<>();
         out.addAll(dump("base_stations", dir, () -> rows(com.abctelecom.nms.model.BaseStation.class,
-                new com.abctelecom.nms.dao.BaseStationDao().findAll()));
+                new com.abctelecom.nms.dao.BaseStationDao().findAll())));
         out.addAll(dump("subscribers", dir, () -> rows(com.abctelecom.nms.model.Subscriber.class,
-                new com.abctelecom.nms.dao.SubscriberDao().findAll()));
+                new com.abctelecom.nms.dao.SubscriberDao().findAll())));
         out.addAll(dump("devices", dir, () -> rows(com.abctelecom.nms.model.Device.class,
-                new com.abctelecom.nms.dao.DeviceDao().findAll()));
+                new com.abctelecom.nms.dao.DeviceDao().findAll())));
         out.addAll(dump("network_slices", dir, () -> rows(com.abctelecom.nms.model.NetworkSlice.class,
-                new com.abctelecom.nms.dao.NetworkSliceDao().findAll()));
+                new com.abctelecom.nms.dao.NetworkSliceDao().findAll())));
         out.addAll(dump("edge_servers", dir, () -> rows(com.abctelecom.nms.model.EdgeServer.class,
-                new com.abctelecom.nms.dao.EdgeServerDao().findAll()));
+                new com.abctelecom.nms.dao.EdgeServerDao().findAll())));
         out.addAll(dump("traffic_flows", dir, () -> rows(com.abctelecom.nms.model.TrafficFlow.class,
-                new com.abctelecom.nms.dao.TrafficFlowDao().findAll()));
+                new com.abctelecom.nms.dao.TrafficFlowDao().findAll())));
         out.addAll(dump("resource_allocations", dir, () -> rows(com.abctelecom.nms.model.ResourceAllocation.class,
-                new com.abctelecom.nms.dao.ResourceAllocationDao().findAll()));
+                new com.abctelecom.nms.dao.ResourceAllocationDao().findAll())));
         out.addAll(dump("optimization_jobs", dir, () -> rows(com.abctelecom.nms.model.OptimizationJob.class,
-                new com.abctelecom.nms.dao.OptimizationJobDao().findAll()));
+                new com.abctelecom.nms.dao.OptimizationJobDao().findAll())));
         // users exported WITHOUT password hashes (security: never back up credential material)
         try (BufferedWriter w = Files.newBufferedWriter(dir.resolve("users_no_credentials.csv"))) {
             w.write("user_id,username,full_name,role,enabled\n");
