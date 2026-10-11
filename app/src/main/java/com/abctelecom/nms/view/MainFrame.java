@@ -92,8 +92,8 @@ public class MainFrame extends JFrame {
         // Cards were registered with the CARDS keys in declaration order,
         // so the component index matches the CARDS array index.
         for (int i = 0; i < CARDS.length; i++)
-            if (content.getComponent(i) == c) return CARDS[i];
-        return "?";
+    if (content.getComponent(i) == c) return CARDS[i];
+return "?";
     }
 
     public void setLoggedIn(User u) {

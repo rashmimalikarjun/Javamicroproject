@@ -1,5 +1,5 @@
 package com.abctelecom.nms.view;
-
+import javax.swing.JPanel;
 import com.abctelecom.nms.util.LogConfig;
 
 import javax.swing.JFrame;
