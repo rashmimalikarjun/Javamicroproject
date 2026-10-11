@@ -39,7 +39,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.abctelecom.nms.Main</mainClass>
+              <mainClass>com.abctelecom.nms.view.Launcher</mainClass>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
             </manifest>
